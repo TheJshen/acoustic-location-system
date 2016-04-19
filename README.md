@@ -11,8 +11,7 @@ Our team members are James Smith, Luis Sanchez and Jason Shen. James and Luis wi
 # Objectives
 Working C implementation of the signal processing algorithm that runs on a Cortex M4 (STM32F4463E) Nucleo microcontroller by the end of the quarter to determine receiving time of 3 acoustic signals
 
-Deliverables
-============
+# Deliverables
 Deliverables will include the code that will be able to take in the signals after they are converted into digital. The code will implement filters to identify the correct sources of the beacon signals, and be able to compute relative times that will be then sent to the surface vessel via socket.io interface. Potential long term goals include adding a graphical display for the current location of the OpenROV on the surface vessel computer, after the triangulation is calculated.
 
 1. C code that given a frequency range, filters out all signals at frequencies out of that range. Code should be modular to be able to handle different transmitting frequencies and should use DSP functionality provided by CMSIS.
