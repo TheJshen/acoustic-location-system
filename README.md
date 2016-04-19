@@ -9,7 +9,7 @@ The Cortex M4 will differentiate each of the signals by frequency, and determine
 Our team members are James Smith, Luis Sanchez and Jason Shen. James and Luis will be working on creating the DSP algorithm to process the incoming signals, and Jason will be working on creating test cases to simulate real-world data.
 
 # Objectives
-Working C implementation of the signal processing algorithm that runs on a Cortex M4 (STM32F4463E) Nucleo) microcontroller by the end of the quarter to determine receiving time of 3 acoustic signals
+Working C implementation of the signal processing algorithm that runs on a Cortex M4 (STM32F4463E) Nucleo microcontroller by the end of the quarter to determine receiving time of 3 acoustic signals
 
 Deliverables
 ============
@@ -37,7 +37,7 @@ Deliverables will include the code that will be able to take in the signals afte
 4. Milestones
   * | James | Luis | Jason
     ----|----|----|----
-    Week 4 | Understand Filtering Techniques (FIR, fft, bandpass), Setup Github
+    Week 4 | Understand Filtering Techniques (FIR, fft, bandpass), Setup Github | same | same
     Week 5 | Implement Hello World on STM32, debug | same | same
     Week 6/7 | Setup ADC so that we can buffer last 10ms of signal | Optimize filter parameters in Python | Optimize filter parameters in Python
     Week 8 | Get DAC working on separate microcontroller to create test signals | Interface ADC code with algorithm | Create test signals, adding noise similar to what will be encountered underwater
@@ -47,7 +47,7 @@ Deliverables will include the code that will be able to take in the signals afte
 # Weekly Deliverables
 ###### Week 5:
 
-Understanding Filtering Techniques - Write report on possible filtering techniques Due monday. Defining fft, fir filter, bandpass filtering Week 5
+Understanding Filtering Techniques - Write report on possible filtering techniques Due Monday. Defining fft, fir filter, bandpass filtering Week 5
 
 ###### Week 6:
 
@@ -83,4 +83,5 @@ Location Triangulation - calculating the 3D location using TDOA data and depth s
 James Smith, Luis Sanchez, Jason Shen
 
 Based off from work done by Jim Trezzo jim@openrov.com
+
 https://github.com/jtrezzo/acoustic-location-system
