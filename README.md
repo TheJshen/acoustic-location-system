@@ -35,6 +35,46 @@ Deliverables will include the code that will be able to take in the signals afte
 3. Software
   * We will be using the C program language and Python for creating test signals to process.
 4. Milestones
-  * lkjlskdj
+  * | James | Luis | Jason
+    ----|----|----|----
+    Week 4 | Understand Filtering Techniques (FIR, fft, bandpass), Setup Github
+    Week 5 | Implement Hello World on STM32, debug
+    Week 6/7 | Setup ADC so that we can buffer last 10ms of signal | Optimize filter parameters in Python | Optimize filter parameters in Python
+    Week 8 | Get DAC working on separate microcontroller to create test signals | Interface ADC code with algorithm | Create test signals, adding noise similar to what will be encountered underwater
+    Week 9/10 | Run tests and Fix Bugs/ Stretch Milestones
+
 
 # Weekly Deliverables
+Week 5:
+
+Understanding Filtering Techniques - Write report on possible filtering techniques Due monday. Defining fft, fir filter, bandpass filtering Week 5
+
+Week 6:
+
+Implement Hello World on STM32 - Get toolchain setup for STM32 and get example such as blinking an LED working on board  
+
+Week 7:
+
+Script filter parameter optimizations (Luis) - Create script that generates filter parameters and determines error of different points in 3D space to optimize which parameters to use for final product
+
+ADC buffer (James): Working demo or report on how the ADC buffer would work.
+
+Port algorithm to C (Jason): Have working C code that performs the signal processing on the STM32 board.
+
+Week 8:
+
+Create test signals (Jason) - generate artificial test data by setting up time difference from 3 transponders, and adding the signals that the OpenROV would receive. Next, add noise by adding random other signals or possibly from underwater recorded audio and determine if our algorithm can accurately determine the time difference of arrival. Due Monday Week 9.??
+
+DAC microcontroller for testing (James): Report or working demo of the integration of the onboard DAC along with our test suite.
+
+Interface ADC code with algorithm (Luis): Working demo of the ADC code and the algorithm working.
+
+Week 9:
+
+Convert Filter Code to run on STM32 - not a direct translation, because we want to optimize our code in C using the DSP functions provided by CSMIS. Due Monday Week 9.
+
+# Stretch Milestones
+
+Communication using socket.io - sending TDOA data to surface computer.
+
+Location Triangulation - calculating the 3D location using TDOA data and depth sensor, possibly Kalman Filter.
