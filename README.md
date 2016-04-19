@@ -78,3 +78,9 @@ Convert Filter Code to run on STM32 - not a direct translation, because we want 
 Communication using socket.io - sending TDOA data to surface computer.
 
 Location Triangulation - calculating the 3D location using TDOA data and depth sensor, possibly Kalman Filter.
+
+# Team Members
+James Smith, Luis Sanchez, Jason Shen
+
+Based off from work done by Jim Trezzo jim@openrov.com
+https://github.com/jtrezzo/acoustic-location-system
