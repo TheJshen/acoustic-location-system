@@ -28,7 +28,7 @@ x1 = np.sin(2*pi*f1*t)
 x2 = np.sin(2*pi*f2*t)
 x3 = np.sin(2*pi*f3*t)
 
-numCycles = 2
+numCycles = 2 ##ask what this is
 #Choosing number of elements from x1, x2 and x3 to create pulse of certain
 #number of cycles. Needs to be done in a nicer way. 
 x1Length = ( 1.0 / f1) * Fs * numCycles
@@ -95,13 +95,16 @@ tsa = dsaTemp/v; #time to get to ROV from a and so on
 tsb = dsbTemp/v;
 tsc = dscTemp/v;
 
-x1Delay = np.zeros(round(tsa * Fs));
+x1Delay = np.zeros(round(tsa * Fs)); # array of the delay to be expected with 0s
 x2Delay = np.zeros(round(tsb * Fs));
 x3Delay = np.zeros(round(tsc * Fs));
 
 #x1Rec = [x1Delay x1Sig x1Delay x1(1:x1Length) temp];
 
 #x1Rec = np.concatenate((np.concatenate((x1Delay, x1Sig),axis = 0), np.concatenate((x1Delay, x1[1:x1Length]), axis = 0)), axis = 0)
+
+# we are having two pulses that are the same with some time in between them to generate them ?
+# will this general signal be anything close to what we will see?
 x1Rec = np.concatenate((np.concatenate((np.concatenate((x1Delay, x1Sig),axis = 0), np.concatenate((x1Delay, x1[0:x1Length]), axis = 0)), axis = 0), temp), axis = 0)
 x2Rec = np.concatenate((np.concatenate((np.concatenate((x2Delay, x2Sig),axis = 0), np.concatenate((x2Delay, x2[0:x2Length]), axis = 0)), axis = 0), temp), axis = 0)
 x3Rec = np.concatenate((np.concatenate((np.concatenate((x3Delay, x3Sig),axis = 0), np.concatenate((x3Delay, x1[0:x3Length]), axis = 0)), axis = 0), temp), axis = 0)

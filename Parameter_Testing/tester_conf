@@ -3,23 +3,23 @@
 45000 #Frequency of third pulse
 300000 #Samlpling frequency, Should be no problem to change this
 10 #Transmits per second
-11 #number of cycles
+1 #number of cycles
 15 #Temp in C
 5 #Salinity in parts per thousand
 10 #depth ofROV
 0.0 #xa
 0 #ya
 0 #za
-10 #xb
+2 #xb
 0 #yb
 0 #zb
 0 #xc
-10 #yc
+2 #yc
 0 #zc
 5 #x location of ROV
 7 #y location of ROV
 1000 # Passband width in hertz
-1000 # Filter order number
+1024 # Filter order number
 20 #smoothing coefficient
 .1 # The chosen set delay-time between pulses
 .05 # A threshold for how strong a signal needs to be on order to be detected as a recieved pulse.
