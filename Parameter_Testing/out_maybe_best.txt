@@ -1,0 +1,15 @@
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = 1, D = 5, cx = 1.008419, cy = 0.993834, xerr = 0.008419, yerr = 0.006166 	  totalERROR= 0.014584 
+frequencies: a=34000 b=30000 c=40000 , x = 95, y = 1, D = 5, cx = 94.096187, cy = 0.724103, xerr = 0.009514, yerr = 0.275897 	  totalERROR= 0.285411 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = 95, D = 5, cx = -1.483229, cy = 92.998458, xerr = 2.483229, yerr = 0.021069 	  totalERROR= 2.504298 
+frequencies: a=34000 b=30000 c=40000 , x = -95, y = 1, D = 5, cx = -95.468560, cy = 0.724103, xerr = -0.004932, yerr = 0.275897 	  totalERROR= 0.270965 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = -95, D = 5, cx = -1.483229, cy = -96.577892, xerr = 2.483229, yerr = -0.016609 	  totalERROR= 2.466620 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = 1, D = 50, cx = 1.868658, cy = 2.013493, xerr = 0.868658, yerr = 1.013493 	  totalERROR= 1.882151 
+frequencies: a=34000 b=30000 c=40000 , x = 50, y = 1, D = 50, cx = 49.497443, cy = 0.795055, xerr = 0.010051, yerr = 0.204945 	  totalERROR= 0.214996 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = 50, D = 50, cx = -0.844656, cy = 48.681801, xerr = 1.844656, yerr = 0.026364 	  totalERROR= 1.871020 
+frequencies: a=34000 b=30000 c=40000 , x = -50, y = 1, D = 50, cx = -50.134509, cy = 0.795055, xerr = -0.002690, yerr = 0.204945 	  totalERROR= 0.202255 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = -50, D = 50, cx = -0.844656, cy = -50.958359, xerr = 1.844656, yerr = -0.019167 	  totalERROR= 1.825489 
+frequencies: a=34000 b=30000 c=40000 , x = 1, y = 1, D = 100, cx = 2.740355, cy = 3.030474, xerr = 1.740355, yerr = 2.030474 	  totalERROR= 3.770829 
+
+
+
+Not the best frequency, 15.30

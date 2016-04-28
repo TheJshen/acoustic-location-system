@@ -118,14 +118,14 @@ def TDOA(x, Fs, v, addedDelay, detectionTreshold):
 
 	#plt.figure()
 	#plt.plot(x[expectedDelay:len(x)-1])
-
 	lastPeak = expectedDelay + singleThresholdDetection(x[expectedDelay:len(x)-1], detectionTreshold);
+        print lastPeak
 	firstPeakTemp = singleThresholdDetection(np.flipud(x[1:(lastPeak-5)]), detectionTreshold);
 	firstPeak = lastPeak - firstPeakTemp - 5;
-
+        #firstPeak = singleThresholdDetection(x, detectionTreshold);
+        print firstPeak
 	tdoa = ((lastPeak - firstPeak)/Fs - addedDelay) * calculationCoeff;
-	tdoaLength = tdoa * v;
-
+        tdoaLength = tdoa * v;
 	return [tdoa, tdoaLength]
 
 #TODO Fix!
@@ -145,32 +145,19 @@ def calculateProjectedCoordinates( D, v, tsa, tsb, tsc, xa, ya, za, xb, yb, zb, 
 	#Designed by Frikk H Solberg
 	#funciton calculates the projected coordinates using a simplified method
 	#from the paper XX. 
+
 	dsa = v*tsa;
 	dsb = v*tsb;
 	dsc = v*tsc;
 
-	#Projecting to plane to move from 3D to 2D
-        #lastPeak = expectedDelay + singleThresholdDetection(x[expectedDelay:len(x)-1], detectionTreshold);
-        print dsa 
-        print dsb 
-        print dsc
-        if (dsa**2 < D**2): 
-            corrected = (dsa**2 - D**2) * -1
-        else:
-            corrected = (dsa**2 - D**2)
+        print tsa
+        print tsb
+        print tsc
 
-        if (dsb**2 < D**2): 
-            correctedb = (dsb**2 - D**2) * -1
-        else:
-            correctedb = (dsb**2 - D**2)
-        
-        if (dsc**2 < D**2): 
-            correctedc = (dsc**2 - D**2) * -1
-        else:
-            correctedc = (dsc**2 - D**2)
-	dsaProjected = math.sqrt(corrected)
-	dsbProjected = math.sqrt(correctedb);
-	dscProjected = math.sqrt(correctedc);
+	#Projecting to plane to move from 3D to 2D
+	dsaProjected = sqrt((dsa*dsa - D*D));
+	dsbProjected = sqrt(dsb*dsb - D*D);
+	dscProjected = sqrt(dsc*dsc - D*D);
 
 	#Calculating positions
 	x = (dsaProjected*dsaProjected - dsbProjected*dsbProjected + xb*xb )/(2*xb);

@@ -9,15 +9,18 @@ import math
 import scipy.io as sio
 
 
+f1 = float(sys.argv[1])
+f2 = float(sys.argv[2])
+f3 = float(sys.argv[3])
+
+print f1
+
 #print ("Starting postion acquisition test:")
 
 #print ("Preparing Signals...")
 #Creating test signals
 ## Setup
 pi = np.pi
-f1 = 35000   #Frequency of first pulse
-f2 = 40000   #Frequency of second pulse
-f3 = 45000   #Frequency of third pulse
 Fs = 300000  #Samlpling frequency, Should be no problem to change this
 tps = 10     #Transmits per second
 #Fs = 2*f1
@@ -37,7 +40,7 @@ x3 = np.sin(2*pi*f3*t)
 
 #Sets number of cycles to create for each pulse (command line arg)
 #NOTE: 11 seems to work pretty accurately
-numCycles = 11
+numCycles = int(sys.argv[4])
 
 #Chooses number of elements from x1, x2, and x2 to create depending on numCycles
 #requested
@@ -52,18 +55,6 @@ temp = np.zeros(.1*Fs)
 x1Sig = np.concatenate((x1[0:x1Length],temp), axis = 0);
 x2Sig = np.concatenate((x2[0:x2Length],temp), axis = 0);
 x3Sig = np.concatenate((x3[0:x3Length],temp), axis = 0);
-
-#Plotting the pulses without zero padding
-plt.figure()
-plt.plot(x1Sig[0:x1Length])
-plt.title('X1 without zero padding')
-plt.figure()
-plt.plot(x2Sig[1:x2Length])
-plt.title('X2 without zero padding')
-plt.figure()
-plt.plot(x3Sig[1:x3Length])
-plt.title('X3 without zero padding')
-plt.show()
 
 #Creating Recieved Signal
 T =  15;                                         #Temp in C
@@ -117,49 +108,7 @@ x1Rec = np.concatenate((np.concatenate((np.concatenate((x1Delay, x1Sig),axis = 0
 x2Rec = np.concatenate((np.concatenate((np.concatenate((x2Delay, x2Sig),axis = 0), np.concatenate((x2Delay, x2[0:x2Length]), axis = 0)), axis = 0), temp), axis = 0)
 x3Rec = np.concatenate((np.concatenate((np.concatenate((x3Delay, x3Sig),axis = 0), np.concatenate((x3Delay, x3[0:x3Length]), axis = 0)), axis = 0), temp), axis = 0)
 
-#Save each received signal to file
-np.savetxt('x1.txt', np.c_[x1Rec], delimiter=' ')   # X is an array
-np.savetxt('x2.txt', x2Rec, delimiter=' ')   # X is an array
-np.savetxt('x3.txt', x3Rec, delimiter=' ')   # X is an array
-
-a={}
-a['x1Rec']=x1Rec
-a['x2Rec']=x2Rec
-a['x3Rec']=x3Rec
-sio.savemat('temp',a)
-
-#Determine the number of samples for the received signal. Why the nested min()?
 recSigLength = min(min(len(x1Rec), len(x2Rec)), len(x3Rec));
-
-
-plt.figure()
-plt.plot(x1Rec[0:recSigLength])
-plt.title('X1 rec')
-
-plt.figure()
-plt.plot(x2Rec[0:recSigLength])
-plt.title('X2 rec')
-
-plt.figure()
-plt.plot(x3Rec[0:recSigLength])
-plt.title('X3 rec')
-
-#print ("Done")
-
-
-##############################making files:
-sigLength = 30000
-
-asig = x1Rec[1:sigLength]
-bsig = x2Rec[1:sigLength]
-csig = x3Rec[1:sigLength]
-
-np.savetxt('signal_a', asig, delimiter=' ')
-np.savetxt('signal_b', bsig, delimiter=' ')
-np.savetxt('signal_c', csig, delimiter=' ')
-
-
-
 
 
 #######################################################################################################
@@ -176,12 +125,6 @@ np.savetxt('signal_c', csig, delimiter=' ')
 recSignal = x1Rec[1:recSigLength] + x2Rec[1:recSigLength] + x3Rec[1:recSigLength];
 
 
-np.savetxt('recSignal.txt', recSignal, delimiter=' ')   # X is an array
-
-plt.figure()
-plt.plot(recSignal)
-plt.title('Recieved signal on ROV')
-
 
 #FFT of recorded signal
 #frikkFFT(recSignal, Fs); #frikkFFT is not yet implemented
@@ -195,7 +138,7 @@ plt.title('Recieved signal on ROV')
 #print ("Designing filters...")
 
 pbw = 1000; # Passband width in hertz
-fOrder = 1024; # Filter order number
+fOrder = 128; # Filter order number now the most optimal 
 b1 = frikkFilterDesigner( f1, pbw, fOrder, Fs );
 b2 = frikkFilterDesigner( f2, pbw, fOrder, Fs );
 b3 = frikkFilterDesigner( f3, pbw, fOrder, Fs );
@@ -209,23 +152,7 @@ b3 = frikkFilterDesigner( f3, pbw, fOrder, Fs );
 #used in the smoothing process. 
 
 #print ("Calculating ROV position")
-
-smoothingCoeff = 20;
-extracted1 = filterAndSmooth(recSignal, b1, smoothingCoeff);
-extracted2 = filterAndSmooth(recSignal, b2, smoothingCoeff);
-extracted3 = filterAndSmooth(recSignal, b3, smoothingCoeff);
-
 ## Plotting filtered, absed and smoothed Signals
-plt.figure()
-plt.plot(extracted1)
-plt.title('X1 filtered from recieved signal')
-plt.figure()
-plt.plot(extracted2)
-plt.title('X2 filtered from recieved signal')
-plt.figure()
-plt.plot(extracted3)
-plt.title('X3 filtered from recieved signal')
-
 ## Detection stuff
 addedDelay = .1; # The chosen set delay-time between pulses
 detectionThreshold = .05; # A threshold for how strong a signal needs to be on order to be detected as a recieved pulse.
@@ -235,11 +162,16 @@ detectionThreshold = .05; # A threshold for how strong a signal needs to be on o
 #run as all other parameters should be set.
 [x, y] = getPositionFromSignal( recSignal, b1, b2, b3, Fs, v, addedDelay, detectionThreshold, D, xa, ya, za, xb, yb, zb, xc, yc, zc )
 
-#print ("Done")
 
-#print ("")
+xerr = abs(xs - x) / xs
+yerr = abs(ys - y) / ys
 
-#print ("Calculated position:")
+f = open ("out_freq.txt", "a")
+
+string = "frequencies: a=%i b=%i c=%i , x = %i, y = %i, cx = %f, cy = %f, xerr = %f, yerr = %f \n" %(f1, f2, f3, xs, ys, x, y, xerr,yerr)
+f.write(string)
+
+f.close()
 
 #print ("D = " , D, "(Not calculated)")
 print ("X = " , x)
