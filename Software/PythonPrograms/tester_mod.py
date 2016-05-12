@@ -180,7 +180,7 @@ np.savetxt('recSignal.txt', recSignal, delimiter=' ')   # X is an array
 #print ("Designing filters...")
 
 pbw = 1000; # Passband width in hertz
-fOrder = 1000; # Filter order number
+fOrder = 1024; # Filter order number
 b1 = frikkFilterDesigner( f1, pbw, fOrder, Fs );
 b2 = frikkFilterDesigner( f2, pbw, fOrder, Fs );
 b3 = frikkFilterDesigner( f3, pbw, fOrder, Fs );
