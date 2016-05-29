@@ -1,8 +1,11 @@
 /*
  * main.h
+ * Header file for Acoustic Location System DSP
+ * Contains #defines, includes, and other constants used for the DSP portion
+ * of the UALS.
  *
- *  Created on: Apr 25, 2016
- *      Author: Jason
+ * Created on: Apr 25, 2016
+ * Author: Jason Shen, James Smith, Luis Sanchez
  */
 
 #ifndef MAIN_H_
@@ -19,30 +22,12 @@
 #define SALINITY            (5.0)     //Default water salinity (parts per thousand)
 #define MOV_AVG_WIND        (20)      //Window for moving average
 
-float filter1Coeffs[NUM_TAPS];
-float filter2Coeffs[NUM_TAPS];
-float filter3Coeffs[NUM_TAPS];
+#define UALS_DEBUG			1 		  //Debug flag
 
-
-
-/*
- * Buoy positions relative to buoy A in meters.
- * The current plan is to use buoys that are 2m apart.
- * In order for algorithm to work, buoy A has to be at origin,
- * B has to be at (x, 0), and C has to be at (0, y).
+/* 
+ * FIR filter coeffecients for f = 35kHz with a 500 Hz band pass
+ * with 64 taps
  */
-float xa = 0;
-float ya = 0;
-float za = 0;
-
-float xb = BUOY_DIST;
-float yb = 0;
-float zb = 0;
-
-float xc = 0;
-float yc = BUOY_DIST;
-float zc = 0;
-
 const float coeffsA[NUM_TAPS] = {
     0.0001749022,
     0.0000129414,
@@ -302,6 +287,149 @@ const float coeffsA[NUM_TAPS] = {
     0.0001749022 
 };
 
+
+/* 
+ * FIR filter coeffecients for f = 40kHz with a 500 Hz band pass
+ * with 64 taps
+ */
+const float coeffsB[NUM_TAPS] = {
+	0.000308,
+	0.000239,
+	-0.000066,
+	-0.000372,
+	-0.000375,
+	0.000033,
+	0.000558,
+	0.000656,
+	0.000056,
+	-0.000817,
+	-0.001079,
+	-0.000249,
+	0.001081,
+	0.001608,
+	0.000572,
+	-0.001285,
+	-0.002188,
+	-0.001022,
+	0.001371,
+	0.002746,
+	0.001571,
+	-0.001303,
+	-0.003209,
+	-0.002165,
+	0.001069,
+	0.003511,
+	0.002738,
+	-0.000687,
+	-0.003605,
+	-0.003226,
+	0.000157,
+	0.003371,
+	0.003371,
+	0.000157,
+	-0.003226,
+	-0.003605,
+	-0.000687,
+	0.002738,
+	0.003511,
+	0.001069,
+	-0.002165,
+	-0.003209,
+	-0.001303,
+	0.001571,
+	0.002746,
+	0.001371,
+	-0.001022,
+	-0.002188,
+	-0.001285,
+	0.000572,
+	0.001608,
+	0.001081,
+	-0.000249,
+	-0.001079,
+	-0.000817,
+	0.000056,
+	0.000656,
+	0.000558,
+	0.000033,
+	-0.000375,
+	-0.000372,
+	-0.000066,
+	0.000239,
+	0.000308,
+};
+
+/* 
+ * FIR filter coeffecients for f = 45kHz with a 500 Hz band pass
+ * with 64 taps
+ */
+const float coeffsC[NUM_TAPS] = {
+	-0.000154,
+	-0.000326,
+	-0.000130,
+	0.000274,
+	0.000439,
+	0.000067,
+	-0.000538,
+	-0.000630,
+	0.000111,
+	0.000961,
+	0.000791,
+	-0.000488,
+	-0.001481,
+	-0.000795,
+	0.001084,
+	0.001982,
+	0.000542,
+	-0.001843,
+	-0.002319,
+	0.000010,
+	0.002642,
+	0.002363,
+	-0.000819,
+	-0.003320,
+	-0.002045,
+	0.001769,
+	0.003720,
+	0.001370,
+	-0.002699,
+	-0.003728,
+	-0.000379,
+	0.003570,
+	0.003570,
+	-0.000379,
+	-0.003728,
+	-0.002699,
+	0.001370,
+	0.003720,
+	0.001769,
+	-0.002045,
+	-0.003320,
+	-0.000819,
+	0.002363,
+	0.002642,
+	0.000010,
+	-0.002319,
+	-0.001843,
+	0.000542,
+	0.001982,
+	0.001084,
+	-0.000795,
+	-0.001481,
+	-0.000488,
+	0.000791,
+	0.000961,
+	0.000111,
+	-0.000630,
+	-0.000538,
+	0.000067,
+	0.000439,
+	0.000274,
+	-0.000130,
+	-0.000326,
+	-0.000154,
+
+};
 float signalABC[NUM_SAMPLES] = {
     0.0000000000,
     0.0000000000,

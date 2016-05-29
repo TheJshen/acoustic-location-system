@@ -4,12 +4,12 @@
  * 
  * Acoustic Location System Filtering
  * 
- * This C module implements the DSP filtering of an input signal. The input
- * signal will be passed in through an ADC connected to a transponder that 
- * receives accoustic waves delivered by three transponders at 3 different
- * frequencies. The coeffecients used for the filter are defined in main.h 
- * and create  bandpass filters for 35kHz, 40kHz and 45kHz with a pass
- * bandwith of 500Hz. 
+ * This C module implements the DSP filtering of an input signal for the 
+ * STM33F446RE Nucleo board.. The input signal will be passed in through 
+ * on board ADC connected to a transponder that receives accoustic waves 
+ * delivered by three transponders at 3 different frequencies. The coeffecients 
+ * used for the filter are defined in main.h and implement  bandpass filters for
+ * 35kHz, 40kHz and 45kHz with a pass bandwith of 500Hz. 
  * 
  * This program will output the time difference of arrival of the three
  * varying frequency signals. the default for for output is:
@@ -114,7 +114,7 @@ int main(void)
     }
     
     float * avgSignal[NUM_SAMPLES];
-    
+   	// Calculate moving average and do peak detection; 
     movAvg(output);
    
 	/* Print signal after moving average */ 
@@ -139,7 +139,7 @@ int main(void)
 int singleThresholdDetection(const float sampleData[], int startPosition)
 {
     int i;
-
+":
     for(i = startPosition; i < NUM_SAMPLES; i++) {
         if (sampleData[i] >= DETECT_THRESH) {
             return i;
@@ -156,10 +156,11 @@ int singleThresholdDetection(const float sampleData[], int startPosition)
  * place moving average algorithm. The window size is defined by MOV_AVG_WIND
  * in main.h. 
  *
- *
+ * This function serves a dual purpose of finding the position of the largest 
+ * peak and returning that position.
  *
  */
-void movAvg(float signal[]) {
+int movAvg(float signal[]) {
      int i = 0;
     
     int start = 0;
@@ -192,6 +193,9 @@ void movAvg(float signal[]) {
         
         if(i > MOV_AVG_WIND*2 - 1) {
             signal[i-(MOV_AVG_WIND*2)] = buffer[i % (MOV_AVG_WIND*2)];
+			if(buffer[i % (MOV_AVG_WIND * 2)] > max) {
+				maxPosition = i - MOV_AVG_WIND * 2;
+				max = 
         }
 
         // Rotating buffer to save the avg
