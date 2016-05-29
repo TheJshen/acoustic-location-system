@@ -26,9 +26,9 @@
  *
  *
  * TODO: 
- * 1.Test on different location  inputs from python script,
+ * 1. Test on different location  inputs from python script,
  * 2. Integrate ADC and filter code
- * 3. If current filtering ans smoothing is innaccurate develop new algorithm
+ * 3. If current filtering and smoothing is innaccurate develop new algorithm
  * 4. Clean up code
 *******************************************************************************/
 
@@ -124,8 +124,10 @@ int main(void)
     
     /* Print before moving average */ 
     printf("----------Before moving average-------------\n");
-    for(i = 0; i < NUM_SAMPLES; i++) {
-        printf("%lf\n", output[i]);
+    if(UALS_DEBUG) {
+        for(i = 0; i < NUM_SAMPLES; i++) {
+            printf("%lf\n", output[i]);
+        }
     }
     
     float * avgSignal[NUM_SAMPLES];
@@ -134,10 +136,12 @@ int main(void)
    
     /* Print signal after moving average */ 
     printf("----------After moving average-------------\n");
-    for(i = 0; i < NUM_SAMPLES; i++) {
-        printf("%lf\n", output[i]);
+    if(UALS_DEBUG) {
+        for(i = 0; i < NUM_SAMPLES; i++) {
+            printf("%lf\n", output[i]);
+        }
     }
-
+    
     /* Find the maximum value of the filtered signal */
     int maxA = findMax(output);
     
@@ -252,7 +256,7 @@ int main(void)
 /*
  * Function Name: singleThresholdDetection()
  * Function Declaration: int singleThresholdDetection(const float sampleData[],
-															int startPosition)
+                                                            int startPosition)
  * Function Description: Calculates the first occurrence of a value over the 
  * threshold value and returns the position.
  *
@@ -330,8 +334,10 @@ void movAvg(float signal[]) {
         signal[i] = buffer[i %(MOV_AVG_WIND*2)];
     }
     
-    for(int i = 0; i < NUM_SAMPLES; i++) {
-        printf("averagedSignal[i] = %f\n", signal[i]);
+    if(UALS_DEBUG) {
+        for(int i = 0; i < NUM_SAMPLES; i++) {
+            printf("averagedSignal[i] = %f\n", signal[i]);
+        }
     }
 }
 
@@ -348,10 +354,10 @@ int findMax(float signal[]) {
     int maxPosition = -1;
     int i;
 
-	/* Go through each element searching for maximum */
+    /* Go through each element searching for maximum */
     for(i = 0; i < NUM_SAMPLES; i++) {
         if(signal[i] > maxVal) {
-			/* We've found a new max, replace */
+            /* We've found a new max, replace */
             maxVal = signal[i];
             maxPosition = i;
         }
@@ -366,3 +372,5 @@ int findMax(float signal[]) {
         return -1;
     }
 }
+
+
