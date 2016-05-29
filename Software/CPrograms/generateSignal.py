@@ -101,6 +101,10 @@ xs = 5;
 ys = 7;
 zs = D;  
 
+print("X distance: " + str(xs));
+print("Y distance: " + str(ys));
+print("Z distance: " + str(zs));
+
 #A whole bunch of math to reverse calculate the TDOA so the signals sent
 #from bouys have the correct progagation delay
 dsaTemp = np.sqrt(D*D + (xs - xa)*(xs - xa) + (ys - ya)*(ys - ya));
@@ -112,9 +116,9 @@ tsa = dsaTemp/v;
 tsb = dsbTemp/v;
 tsc = dscTemp/v;
 
-print("Distance to A" + str(tsa * Fs))
-print("Distance to B" + str(tsb * Fs))
-print("Distance to C" + str(tsc * Fs))
+print("Distance to A " + str(tsa * Fs))
+print("Distance to B " + str(tsb * Fs))
+print("Distance to C " + str(tsc * Fs))
 
 #Calculate delays based on time to receive
 x1Delay = np.zeros(round(tsa * Fs));
@@ -172,7 +176,6 @@ print ("Done")
 #This signal would also (usually and hopefully) include 2 peaks from each
 #bouy so that TDOA is possible to calculate
 recSignal = x1Rec[0:recSigLength] + x2Rec[0:recSigLength] + x3Rec[0:recSigLength];
-
 
 np.savetxt('recSignal.txt', recSignal, fmt='%f', delimiter=', ')   # X is an array
 
